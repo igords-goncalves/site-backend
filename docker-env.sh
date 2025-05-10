@@ -11,7 +11,7 @@ show_menu() {
 
 run_dev() {
   echo "Iniciando o container em modo dev..."
-  docker-compose -f docker-compose.yml up app-dev --watch --build
+  docker-compose -f docker-compose.yml up app-dev --build --watch
 }
 
 run_prod() {

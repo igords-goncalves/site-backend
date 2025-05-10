@@ -4,7 +4,7 @@ services:
     container_name: mongo-db
     restart: always
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
@@ -18,7 +18,7 @@ services:
     container_name: mongo-express
     restart: always
     ports:
-      - "8081:8081"
+      - '8081:8081'
     depends_on:
       - mongo
     environment:
@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile
     container_name: site-backend-build
     ports:
-      - "4000:4000"
+      - '4000:4000'
     environment:
       - NODE_ENV=${NODE_ENV}
       - SERCRET_KEY=${SECRET_KEY}
@@ -47,10 +47,13 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     container_name: site-backend-dev
+    restart: always
     ports:
-      - "4000:4000"
+      - '4000:4000'
     volumes:
-      - .:/user/app
+      - .:/usr/app
+      - /usr/app/node_modules
+    command: npm run dev
     depends_on:
       - mongo
       - mongo-express
