@@ -17,7 +17,10 @@ import { SupporterModule } from './modules/supporter/supporter.module';
     TypeOrmModule.forRoot({
       name: 'mongoConnection',
       type: 'mongodb',
-      url: process.env.MDB_URL_DEV,
+      url:
+        process.env.NODE_ENV === 'production'
+          ? process.env.MDB_URL
+          : process.env.MDB_URL_DEV,
       useNewUrlParser: true,
       logging: true,
       useUnifiedTopology: true,
