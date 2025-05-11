@@ -52,7 +52,7 @@ export class HeadService {
   async findAll(): Promise<HeadEntity[]> {
     const heads = await this.headEntityRepo.find();
 
-    if (!heads) {
+    if (heads.length === 0) {
       throw new NotFoundException('Nenhum dado encontrado');
     }
 

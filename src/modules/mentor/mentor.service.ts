@@ -56,7 +56,7 @@ export class MentorService {
   async findAll(): Promise<MentorEntity[]> {
     const mentors = await this.mentorEntityRepo.find();
 
-    if (!mentors) {
+    if (mentors.length === 0) {
       throw new NotFoundException('Nenhum dado encontrado');
     }
 

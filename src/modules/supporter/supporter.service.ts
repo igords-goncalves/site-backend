@@ -61,7 +61,7 @@ export class SupporterService {
   async findAll(): Promise<SupporterEntity[]> {
     const supporters = await this.supporterEntityRepo.find();
 
-    if (!supporters) {
+    if (supporters.length === 0) {
       throw new Error('Nenhum dado encontrado');
     }
 

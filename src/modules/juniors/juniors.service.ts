@@ -57,7 +57,7 @@ export class JuniorsService {
   async findAll(): Promise<JuniorMDBEntity[]> {
     const juniors = await this.juniormdbRepository.find();
 
-    if (!juniors) {
+    if (juniors.length === 0) {
       throw new NotFoundException('Nenhum dado encontrado.');
     }
 
