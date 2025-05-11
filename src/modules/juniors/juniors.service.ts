@@ -16,21 +16,38 @@ export class JuniorsService {
   ) {}
 
   async create(createJuniorDto: CreateJuniorDto): Promise<JuniorMDBEntity> {
+    const juniorExists = await this.findJuniorByEmail(
+      createJuniorDto.email,
+      false,
+    );
+
+    if (juniorExists) {
+      throw new BadRequestException('Já existe um junior com esse email.');
+    }
+
     const juniorMDB = this.juniormdbRepository.create({
       ...createJuniorDto,
       startDate: new Date(createJuniorDto.startDate),
     });
 
+    if (!juniorMDB) {
+      throw new BadRequestException('Junior não foi criado.');
+    }
+
     return this.juniormdbRepository.save(juniorMDB);
   }
 
-  async findJuniorByEmail(email: string): Promise<JuniorMDBEntity> {
+  async findJuniorByEmail(
+    email: string,
+    throwIfNotfound = true,
+  ): Promise<JuniorMDBEntity> {
     if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       throw new BadRequestException('Email inválido.');
     }
 
     const junior = await this.juniormdbRepository.findOne({ where: { email } });
-    if (!junior) {
+
+    if (!junior && throwIfNotfound) {
       throw new NotFoundException('Junior não encontrado.');
     }
 

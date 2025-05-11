@@ -2,23 +2,19 @@ import {
   BadRequestException,
   Body,
   Controller,
-  HttpStatus,
   Post,
-  Res,
   UseGuards,
   Get,
-  Req,
   Param,
-  NotFoundException,
 } from '@nestjs/common';
 import { JuniorsService } from './juniors.service';
 import { CreateJuniorDto } from './dtos/create-junior-dto';
-import { JuniorEntity } from 'src/database/entities/junior.entity';
-import { Response } from 'express';
-import { ApiOperation, ApiResponse, ApiHeader } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiHeader, ApiTags } from '@nestjs/swagger';
 import { SecretKeyGuard } from 'src/shared/guards/secret-key.guard';
+import { JuniorMDBEntity } from '../../database/entities/juniormdb.mongo-entity';
 
-@Controller('juniors')
+@ApiTags('Junior')
+@Controller('junior')
 export class JuniorsController {
   constructor(private readonly juniorsService: JuniorsService) {}
 
@@ -43,39 +39,13 @@ export class JuniorsController {
   @Post()
   async create(
     @Body() createJuniorDto: CreateJuniorDto,
-    @Res() res: Response,
-  ): Promise<JuniorEntity> {
-    try {
-      const juniorExist = await this.juniorsService.findJuniorByEmail(
-        createJuniorDto.email,
-      );
-
-      if (juniorExist) {
-        res.status(HttpStatus.CONFLICT).json({
-          statusCode: HttpStatus.CONFLICT,
-          message: 'Já existe um junior com esse email.',
-        });
-        return;
-      }
-
-      const junior = await this.juniorsService.create(createJuniorDto);
-
-      if (!junior) {
-        res
-          .status(HttpStatus.BAD_REQUEST)
-          .json({ mensagem: 'junior não foi criado' });
-      }
-
-      res.status(HttpStatus.CREATED).json(junior);
-    } catch (error) {
-      res
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ message: 'Erro interno' });
-    }
+  ): Promise<JuniorMDBEntity> {
+    const junior = await this.juniorsService.create(createJuniorDto);
+    return junior;
   }
 
   @ApiOperation({
-    summary: 'Resgata registro do junior no Banco',
+    summary: 'Resgata registro do junior no banco',
   })
   @ApiResponse({
     status: 200,
@@ -90,24 +60,23 @@ export class JuniorsController {
   @Get(':email')
   async getByEmail(@Param('email') email: string): Promise<CreateJuniorDto> {
     const junior = await this.juniorsService.findJuniorByEmail(email);
-
     return junior;
   }
 
   @ApiOperation({
-    summary: 'Resgata todos os juniors do Banco',
+    summary: 'Resgata todos os juniors do banco',
   })
   @ApiResponse({
     status: 200,
     description: 'Sucesso',
-    type: CreateJuniorDto,
+    type: [CreateJuniorDto],
   })
   @ApiResponse({
     status: 400,
     description: 'Erro',
     type: BadRequestException,
   })
-  @Get('/')
+  @Get()
   async getAll(): Promise<CreateJuniorDto[]> {
     const juniors = await this.juniorsService.findAll();
     return juniors;
