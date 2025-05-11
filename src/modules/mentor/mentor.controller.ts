@@ -3,19 +3,17 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus,
-  NotFoundException,
   Param,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiHeader } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiHeader, ApiTags } from '@nestjs/swagger';
 import { MentorEntity } from 'src/database/entities/mentor.mongo-entity';
 import { MentorService } from './mentor.service';
 import { CreateMentorDTO } from './dto/create-mentor-dto';
 import { SecretKeyGuard } from 'src/shared/guards/secret-key.guard';
 
+@ApiTags('Mentor')
 @Controller('mentor')
 export class MentorController {
   constructor(private readonly mentorService: MentorService) {}
@@ -71,7 +69,7 @@ export class MentorController {
   @ApiResponse({
     status: 200,
     description: 'Sucesso',
-    type: CreateMentorDTO,
+    type: [CreateMentorDTO],
   })
   @ApiResponse({
     status: 400,
