@@ -63,7 +63,7 @@ export class SupporterService {
     const supporters = await this.supporterEntityRepo.find();
 
     if (supporters.length === 0) {
-      throw new Error('Nenhum dado encontrado');
+      throw new NotFoundException('Nenhum dado encontrado');
     }
 
     return supporters;

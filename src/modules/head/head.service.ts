@@ -44,7 +44,7 @@ export class HeadService {
     });
 
     if (!head) {
-      throw new NotFoundException('Head não foi criado');
+      throw new BadRequestException('Head não foi criado');
     }
 
     return this.headEntityRepo.save(head);
