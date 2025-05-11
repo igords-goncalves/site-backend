@@ -57,7 +57,7 @@ export class HeadController {
   })
   @Get(':email')
   async getByEmail(@Param('email') email: string) {
-    const head = await this.headService.findMentorByEmail(email);
+    const head = await this.headService.findHeadByEmail(email);
     return head;
   }
 

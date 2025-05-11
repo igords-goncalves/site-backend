@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -15,7 +16,7 @@ export class HeadService {
     private readonly headEntityRepo: Repository<HeadEntity>,
   ) {}
 
-  async findMentorByEmail(
+  async findHeadByEmail(
     email: string,
     throwIfNotfound = true,
   ): Promise<HeadEntity> {
@@ -32,10 +33,10 @@ export class HeadService {
   }
 
   async create(createHeadDto: CreateHeadDTO): Promise<HeadEntity> {
-    const headExists = await this.findMentorByEmail(createHeadDto.email, false);
+    const headExists = await this.findHeadByEmail(createHeadDto.email, false);
 
     if (headExists) {
-      throw new NotFoundException('Já existe head com esse email');
+      throw new ConflictException('Já existe head com esse email');
     }
 
     const head = this.headEntityRepo.create({
