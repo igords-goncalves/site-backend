@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -22,7 +23,7 @@ export class JuniorsService {
     );
 
     if (juniorExists) {
-      throw new BadRequestException('Já existe um junior com esse email.');
+      throw new ConflictException('Já existe um junior com esse email.');
     }
 
     const juniorMDB = this.juniormdbRepository.create({

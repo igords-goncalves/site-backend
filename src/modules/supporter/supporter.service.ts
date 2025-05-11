@@ -2,6 +2,7 @@ import {
   Injectable,
   BadRequestException,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -42,7 +43,7 @@ export class SupporterService {
     );
 
     if (supporterExists) {
-      throw new BadRequestException(
+      throw new ConflictException(
         'Já existe apoiador registrado com esse email',
       );
     }

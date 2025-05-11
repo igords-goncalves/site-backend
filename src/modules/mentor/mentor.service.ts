@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -40,7 +41,7 @@ export class MentorService {
     );
 
     if (mentorExists) {
-      throw new BadRequestException('Já existe mentor com esse Email');
+      throw new ConflictException('Já existe mentor com esse Email');
     }
 
     const mentor = this.mentorEntityRepo.create({
