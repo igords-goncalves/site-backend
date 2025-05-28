@@ -60,7 +60,7 @@ export class MentorService {
   async findAll(
     pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<MentorEntity>> {
-    const oderDirection = pageOptionsDto.order === 'ASC' ? 1 : -1;
+    const orderDirection = pageOptionsDto.order === 'ASC' ? 'ASC' : 'DESC';
 
     const [data, itemCount] = await Promise.all([
       this.mentorEntityRepo.find({
