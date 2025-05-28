@@ -29,7 +29,6 @@ export function GetSupporterSwagger() {
       status: 200,
       description: 'Sucesso',
       type: PaginatedSupporterResponseDTO,
-      isArray: true,
     }),
     ApiResponse({
       status: 400,

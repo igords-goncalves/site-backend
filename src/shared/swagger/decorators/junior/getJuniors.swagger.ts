@@ -29,7 +29,6 @@ export function GetJuniorsSwagger() {
       status: 200,
       description: 'Sucesso',
       type: PaginatedJuniorResponseDTO,
-      isArray: true,
     }),
     ApiResponse({
       status: 400,
