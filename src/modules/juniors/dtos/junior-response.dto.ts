@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ObjectId, ObjectIdColumn } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 export class JuniorResponseDTO {
-  @ObjectIdColumn()
+  @ApiProperty()
   id: ObjectId;
 
   @ApiProperty()

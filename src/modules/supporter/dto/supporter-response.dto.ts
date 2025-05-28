@@ -1,20 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { ObjectId, ObjectIdColumn } from 'typeorm';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ObjectId } from 'mongodb';
 
 export class SupporterResponseDTO {
-  @ObjectIdColumn()
+  @ApiProperty()
   id: ObjectId;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   expertiseAreas?: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   institution?: string;
 
   @ApiProperty()
   contactAgreement: boolean;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   describeLinks?: string;
 
   @ApiProperty()
@@ -23,10 +23,10 @@ export class SupporterResponseDTO {
   @ApiProperty()
   name: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   opportunitiesDescription?: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   otherSupport?: string;
 
   @ApiProperty()
