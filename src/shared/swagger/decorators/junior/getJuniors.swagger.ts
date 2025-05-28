@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { JuniorResponseDTO } from 'src/modules/juniors/dtos/junior-response.dto';
+import { PaginatedJuniorResponseDTO } from 'src/modules/juniors/dtos/paginated-junior.dto';
 
 export function GetJuniorsSwagger() {
   return applyDecorators(
@@ -22,6 +23,12 @@ export function GetJuniorsSwagger() {
       status: 200,
       description: 'Sucesso',
       type: JuniorResponseDTO,
+      isArray: true,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Sucesso',
+      type: PaginatedJuniorResponseDTO,
       isArray: true,
     }),
     ApiResponse({
