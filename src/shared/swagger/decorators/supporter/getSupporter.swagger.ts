@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { PaginatedSupporterResponseDTO } from 'src/modules/supporter/dto/paginated-suporter.dto';
 import { SupporterResponseDTO } from 'src/modules/supporter/dto/supporter-response.dto';
 
 export function GetSupporterSwagger() {
@@ -23,6 +24,11 @@ export function GetSupporterSwagger() {
       description: 'Sucesso',
       type: SupporterResponseDTO,
       isArray: true,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Sucesso',
+      type: PaginatedSupporterResponseDTO,
     }),
     ApiResponse({
       status: 400,

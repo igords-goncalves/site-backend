@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { HeadResponseDTO } from 'src/modules/head/dto/head-response.dto';
+import { PaginatedHeadResponseDTO } from 'src/modules/head/dto/pagineted-head.dto';
 
 export function GetHeadSwagger() {
   return applyDecorators(
@@ -23,6 +24,11 @@ export function GetHeadSwagger() {
       description: 'Sucesso',
       type: HeadResponseDTO,
       isArray: true,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Sucesso',
+      type: PaginatedHeadResponseDTO,
     }),
     ApiResponse({
       status: 400,
