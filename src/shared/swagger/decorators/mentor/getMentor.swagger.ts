@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { MentorResponseDTO } from 'src/modules/mentor/dto/mentor-response.dto';
+import { PaginatedMentorResponseDTO } from 'src/modules/mentor/dto/paginated-mentor-response.dto';
 
 export function GetMentorSwagger() {
   return applyDecorators(
@@ -16,7 +17,11 @@ export function GetMentorSwagger() {
       status: 200,
       description: 'Sucesso',
       type: MentorResponseDTO,
-      isArray: true,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Sucesso',
+      type: PaginatedMentorResponseDTO,
     }),
     ApiResponse({
       status: 400,
