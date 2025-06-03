@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PageOptionsDto } from './page-options.dto';
+import { Order } from '../enum/pagination-order';
 
 interface PageMetaDtoParameters {
   pageOptionsDto: PageOptionsDto;
@@ -12,6 +13,9 @@ export default class PageMetaDto {
 
   @ApiProperty()
   readonly take: number;
+
+  @ApiProperty()
+  readonly order: Order;
 
   @ApiProperty()
   readonly itemCount: number;
@@ -28,6 +32,7 @@ export default class PageMetaDto {
   constructor({ pageOptionsDto, itemCount }: PageMetaDtoParameters) {
     this.page = pageOptionsDto.page;
     this.take = pageOptionsDto.take;
+    this.order = this.order;
     this.itemCount = itemCount;
     this.pageCount = Math.ceil(this.itemCount / this.take);
     this.hasPreviousPage = this.page > 1;
