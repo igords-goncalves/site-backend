@@ -4,8 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
-import { PaginatedSupporterResponseDTO } from 'src/modules/supporter/dto/paginated-suporter.dto';
-import { SupporterResponseDTO } from 'src/modules/supporter/dto/supporter-response.dto';
+import { PaginatedSupporterResponseDTO } from 'src/modules/supporter/dto/paginated-supporter.dto';
 
 export function GetSupporterSwagger() {
   return applyDecorators(
@@ -18,12 +17,6 @@ export function GetSupporterSwagger() {
       description: 'Email do apoiador (opcional)',
       required: false,
       type: String,
-    }),
-    ApiResponse({
-      status: 200,
-      description: 'Sucesso',
-      type: SupporterResponseDTO,
-      isArray: true,
     }),
     ApiResponse({
       status: 200,

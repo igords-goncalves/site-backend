@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
-import { JuniorResponseDTO } from 'src/modules/juniors/dtos/junior-response.dto';
 import { PaginatedJuniorResponseDTO } from 'src/modules/juniors/dtos/paginated-junior.dto';
 
 export function GetJuniorsSwagger() {
@@ -18,12 +17,6 @@ export function GetJuniorsSwagger() {
       description: 'Email do júnior (opcional)',
       required: false,
       type: String,
-    }),
-    ApiResponse({
-      status: 200,
-      description: 'Sucesso',
-      type: JuniorResponseDTO,
-      isArray: true,
     }),
     ApiResponse({
       status: 200,
