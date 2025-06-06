@@ -1,4 +1,4 @@
-import {  Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MailModule } from './shared/providers/mailer/mailer.module';
 import { UserModule } from './modules/user/user.module';
@@ -8,6 +8,7 @@ import { JuniorsModule } from './modules/juniors/juniors.module';
 import { MentorModule } from './modules/mentor/mentor.module';
 import { HeadModule } from './modules/head/head.module';
 import { SupporterModule } from './modules/supporter/supporter.module';
+import { FaqModule } from './modules/faq/faq.module';
 
 @Module({
   imports: [
@@ -33,9 +34,9 @@ import { SupporterModule } from './modules/supporter/supporter.module';
     MentorModule,
     HeadModule,
     SupporterModule,
+    FaqModule,
   ],
 
   providers: [],
 })
-export class AppModule {
- }
+export class AppModule {}
